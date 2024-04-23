@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom"
 import Productcard from "../components/product-card"
 import { useLatestProductsQuery } from "../redux/api/productApi"
-import toast, { ToastBar } from "react-hot-toast"
+import toast from "react-hot-toast"
 import { Skeleton } from "../components/loading"
 import { CartItem } from "../types/types"
 import { useDispatch } from "react-redux"
@@ -13,13 +13,16 @@ const Home = () => {
   if (isError) {
     toast.error("Cannot fetch latest products...")
   }
-  const addToCartHandler = (cartItem: CartItem) => {
+  const addToCartHandler = (cartItem: CartItem): string | undefined => {
     if (cartItem.stock < 1) {
       toast.error("Product is out of stock now...")
+      return "Product is out of stock"
     }
     dispatch(addToCart(cartItem))
     toast.success("Added to cart")
+    return "Added to cart"
   }
+  
   return (
     <div className="home">
       <section>

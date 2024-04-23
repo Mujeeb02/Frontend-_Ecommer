@@ -17,9 +17,6 @@ const Search = () => {
   const [sort, setSort] = useState("")
   const [maxprice, setMaxprice] = useState(100000)
   const [page, setpage] = useState(1);
-  const ProductHandler = () => {
-
-  }
   const isprevpage = page > 1;
   const isnextpage = page < 4;
 
@@ -40,13 +37,16 @@ const Search = () => {
     toast.error(err.data.message)
   }
 
-  const addToCartHandler = (cartItem: CartItem) => {
+  const addToCartHandler = (cartItem: CartItem): string | undefined => {
     if (cartItem.stock < 1) {
       toast.error("Product is out of stock now...")
+      return "Product is out of stock"
     }
     dispatch(addToCart(cartItem))
     toast.success("Added to cart")
+    return "Added to cart"
   }
+  
   return (
     <div className="product-search-page">
       <aside>
