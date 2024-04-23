@@ -31,7 +31,7 @@ const Shipping = () => {
         e.preventDefault()
         dispatch(saveShippingInfo(shippingInfo))
         try {
-            const{data}=await axios.post(`http://localhost:4000/api/v1/payment/create`,
+            const{data}=await axios.post(`https://mern-ecommerce-server-2.onrender.com/api/v1/payment/create`,
             {amount:total},
             {
                 headers:{

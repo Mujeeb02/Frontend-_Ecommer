@@ -49,7 +49,6 @@ const App = () => {
 
       if(user){
         const data=await getUser(user.uid);
-
         dispatch(userExist(data.users))
       }else{
         dispatch(userNotExist())

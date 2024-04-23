@@ -3,9 +3,11 @@ import { useState } from "react"
 import toast from "react-hot-toast";
 import { FcGoogle } from "react-icons/fc";
 import { auth } from "../firebase";
-import { useLoginMutation } from "../redux/api/userApi";
+import { getUser, useLoginMutation } from "../redux/api/userApi";
 import { FetchBaseQueryError } from "@reduxjs/toolkit/query/react";
 import { MessageResponse } from "../types/api-types";
+import { useDispatch } from "react-redux";
+import { userExist, userNotExist } from "../redux/reducer/userReducer";
 const Login = () => {
   const [gender, setGender] = useState("");
   const [dob, setDob] = useState(""); // Assuming this is a string representation of date of birth
@@ -14,6 +16,7 @@ const Login = () => {
 
   const loginHandler = async () => {
     try {
+      const dispatch=useDispatch()
       const provider = new GoogleAuthProvider();
       const { user } = await signInWithPopup(auth, provider);
       const res = await login({
@@ -29,10 +32,13 @@ const Login = () => {
       console.log("Handler")
       if ("data" in res) {
         toast.success(res.data.message);
+        const data = await getUser(user.uid);
+        dispatch(userExist(data?.users!));
       } else {
         const error = res.error as FetchBaseQueryError;
         const message = (error.data as MessageResponse).message;
         toast.error(message);
+        dispatch(userNotExist());
       }
     } catch (error) {
       toast.error("Sign In Fail");
