@@ -1,13 +1,23 @@
 
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom"
-import { lazy, Suspense } from "react"
+import { lazy, Suspense, useEffect } from "react"
 
 const Home = lazy(() => import("./pages/home"))
 const Search = lazy(() => import("./pages/search"))
 const Cart = lazy(() => import("./pages/cart"))
 import Loading from "./components/loading"
 import Header from "./components/header"
+import { Toaster } from "react-hot-toast"
 import Login from "./pages/login"
+import { onAuthStateChanged } from "firebase/auth"
+import { auth } from "./firebase"
+import { getUser } from "./redux/api/userApi"
+import { useDispatch, useSelector } from "react-redux"
+import { userExist, userNotExist } from "./redux/reducer/userReducer"
+import { userReducerInitialState } from "./types/reducer-types"
+import ProtectedRoute from "./components/admin/protected-routs"
+import NotFound from "./pages/Not-Found"
+
 const Dashboard = lazy(() => import("./pages/admin/dashboard"));
 const Products = lazy(() => import("./pages/admin/products"));
 const Customers = lazy(() => import("./pages/admin/customers"));
@@ -21,6 +31,7 @@ const Toss = lazy(() => import("./pages/admin/apps/toss"));
 const NewProduct = lazy(() => import("./pages/admin/management/newproduct"));
 const Shipping=lazy(()=>import("./pages/shipping"))
 const Orders=lazy(()=>import("./pages/orders"))
+const CheckOut=lazy(()=>import("./pages/checkOut")) 
 const ProductManagement = lazy(
   () => import("./pages/admin/management/productmanagement")
 );
@@ -28,9 +39,26 @@ const TransactionManagement = lazy(
   () => import("./pages/admin/management/transactionmanagement")
 );
 const App = () => {
-  return (
+  
+  const { user, loading } = useSelector(
+    (state: {userReducer:userReducerInitialState}) => state.userReducer
+  );
+  const dispatch=useDispatch()
+  useEffect(()=>{
+    onAuthStateChanged(auth,async (user)=>{
+
+      if(user){
+        const data=await getUser(user.uid);
+
+        dispatch(userExist(data.users))
+      }else{
+        dispatch(userNotExist())
+      }
+    })
+  },[])
+  return loading?<Loading/>:(
     <Router>
-      <Header/>
+      <Header user={user}/>
       <Suspense fallback={<Loading />}>
         <Routes>
           <Route path="/" element={<Home />} />
@@ -56,13 +84,19 @@ const App = () => {
           <Route path="/admin/product/:id" element={<ProductManagement />} />
 
           <Route path="/admin/transaction/:id" element={<TransactionManagement />} />
-          <Route>
+          <Route path="/login" element={<ProtectedRoute isAuthenticated={user?false:true}>
+            <Login/>
+          </ProtectedRoute>}></Route>
+          <Route element={<ProtectedRoute isAuthenticated={user?true:false}/>}>
             <Route path="/shipping" element={<Shipping/>}></Route>
-            <Route path="/login" element={<Login/>}></Route>
             <Route path="/orders" element={<Orders/>}></Route>
+            <Route path="/pay" element={<CheckOut/>}></Route>
           </Route>
+          <Route path="/*" element={<NotFound/>} />
         </Routes>
+        
       </Suspense>
+      <Toaster position="bottom-center"/>
     </Router>
   )
 }

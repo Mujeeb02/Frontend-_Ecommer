@@ -1,21 +1,33 @@
 import { FaTrash } from "react-icons/fa"
+import { CartItem } from "../types/types";
 
-const CartItem = ({data}:any) => {
+type CartItemProps = {
+  cartItem: CartItem;
+  incrementHandler: (cartItem:CartItem) => void;
+  decrementHandler: (cartItem:CartItem) => void;
+  removeHandler: (id: string) => void;
+};
+const CartItemCard = ({cartItem,
+  incrementHandler,
+  decrementHandler,
+  removeHandler,
+}: CartItemProps) => {
+  const { photo, productId, name, price, quantity } = cartItem;
   return (
     <div className="cart-item">
-      <img src={data.photo} alt={data.name} />
+      <img src={`https://mern-ecommerce-server-2.onrender.com/${photo}`} alt={name} />
       <article>
-        <p>{data.name}</p>
-        <p><b>INR{data.price}</b></p>
+        <p>{name}</p>
+        <p><b>INR{price}</b></p>
       </article>
       <div>
-        <button>-</button>
-        <p>{data.quantity}</p>
-        <button>+</button>
+        <button onClick={() => decrementHandler(cartItem)}>-</button>
+        <p>{quantity}</p>
+        <button onClick={() => incrementHandler(cartItem)}>+</button>
       </div>
-      <button><FaTrash/></button>
+      <button onClick={() => removeHandler(productId)}><FaTrash/></button>
     </div>
   )
 }
 
-export default CartItem
+export default CartItemCard
