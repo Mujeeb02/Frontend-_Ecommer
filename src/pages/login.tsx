@@ -11,13 +11,12 @@ import { userExist, userNotExist } from "../redux/reducer/userReducer";
 const Login = () => {
   const [gender, setGender] = useState("");
   const [dob, setDob] = useState(""); // Assuming this is a string representation of date of birth
+  const dispatch=useDispatch();
   const [login] = useLoginMutation();
-
-
   const loginHandler = async () => {
     try {
-      const dispatch=useDispatch()
       const provider = new GoogleAuthProvider();
+      console.log(provider)
       const { user } = await signInWithPopup(auth, provider);
       const res = await login({
         name: user.displayName!,
@@ -28,13 +27,12 @@ const Login = () => {
         dob:Date(),
         _id: user.uid,
       });
-      console.log(res)
-      console.log("Handler")
       if ("data" in res) {
         toast.success(res.data.message);
         const data = await getUser(user.uid);
         dispatch(userExist(data?.users!));
       } else {
+        console.log("Error occured")
         const error = res.error as FetchBaseQueryError;
         const message = (error.data as MessageResponse).message;
         toast.error(message);
