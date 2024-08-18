@@ -23,7 +23,7 @@ const Header = ({ user }: PropsType) => {
 
     return (
         <nav className="header">
-            <Link onClick={() => setIsOpen(false)} to="/">
+            <Link className="" onClick={() => setIsOpen(false)} to="/">
                 Home
             </Link>
             <Link onClick={() => setIsOpen(false)} to="/search">

@@ -22,7 +22,7 @@ const Home = () => {
     toast.success("Added to cart")
     return "Added to cart"
   }
-  
+  console.log(data?.data)
   return (
     <div className="home">
       <section>
@@ -44,6 +44,9 @@ const Home = () => {
             ))
         }
       </main>
+      <div className="text-3xl font-bold bg-gray-300">
+        categories
+      </div>
     </div>
   )
 }

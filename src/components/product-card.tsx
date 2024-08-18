@@ -13,7 +13,7 @@ type ProductsProps={
 const Productcard = ({productId,photo,name,price,stock,handler}:ProductsProps) => {
   return (
     <div className="productcard">
-      <img src={`https://mern-ecommerce-server-2.onrender.com/${photo}`} alt={name} />
+      <img src={`${photo}`} alt={name} />
       <p>{name}</p>
       <span>INR{price}</span>
       <div>
