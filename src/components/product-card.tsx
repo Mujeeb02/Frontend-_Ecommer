@@ -4,7 +4,7 @@ type ProductsProps = {
   productId: string;
   photo: string;
   name: string;
-  description:string;
+  description: string;
   price: number;
   stock: number;
   handler: (cartItem: CartItem) => string | undefined;
@@ -20,7 +20,6 @@ const Productcard = ({
   handler,
 }: ProductsProps) => {
   return (
-    <div>
       <div className="relative flex flex-col items-center justify-between p-4 mt-10 ml-5 rounded-xl bg-white
       border border-gray-200 shadow-md hover:shadow-lg transition-shadow duration-300 ease-in-out transform hover:-translate-y-1.5">
 
@@ -59,7 +58,6 @@ const Productcard = ({
           </button>
         </div>
       </div>
-    </div>
   );
 };
 

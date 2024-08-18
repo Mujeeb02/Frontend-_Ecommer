@@ -1,3 +1,4 @@
+import { Category } from "../components/categories";
 import { Bar, CartItem, Line, Order,Pie, Product, ShippingInfo, Stats, User } from "./types";
 
 export type customError = {
@@ -39,7 +40,7 @@ export type ProductsResponse = {
 
 export type CategoriesResponse = {
   success: boolean;
-  data: string[];
+  data: Category[];
 };
 
 export type SearchProductResponse = {

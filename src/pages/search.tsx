@@ -48,7 +48,7 @@ const Search = () => {
   }
   
   return (
-    <div className="product-search-page">
+    <div className="product-search-page bg-[#F3F4F6]">
       <aside>
         <h2>Filters</h2>
         <div>
@@ -68,9 +68,8 @@ const Search = () => {
           <select value={category} onChange={(e) => setCategory(e.target.value)}>
             <option value="">ALL</option>
             {!isLoading && categoriesResponse?.data.map((i) => (
-              <option key={i} value={i}>{i.toUpperCase()}</option>
+              <option key={i.category} value={i.category}>{i.category.toUpperCase()}</option>
             ))}
-
           </select>
         </div>
       </aside>
