@@ -9,6 +9,7 @@ import { addToCart } from "../redux/reducer/cartReducer"
 import { FaArrowAltCircleRight } from "react-icons/fa";
 import Categories from "../components/categories"
 import Footer from "../components/footer"
+import ServiceCard from "../components/Ad"
 const Home = () => {
   const { data, isLoading, isError } = useLatestProductsQuery("")
   const dispatch = useDispatch()
@@ -29,7 +30,7 @@ const Home = () => {
     <div className="home bg-[#F3F4F6]">
       {/* Hero Section */}
 <div className="flex items-center justify-between text-gray-800 px-10 py-20">
-  <div className="w-1/2 h-[60vh] flex flex-col justify-center space-y-6">
+  <div className="hidden w-1/2 h-[60vh] md:flex flex-col justify-center space-y-6">
     <div className=" w-[70%] bg-white bg-opacity-80 p-8 rounded-lg shadow-lg" style={{fontFamily:"Grey Qo"}}>
       <h1 className="text-3xl font-extrabold leading-tight">
         Discover the Perfect Blend of Style and Savings—Shop the Latest Trends with Unbeatable Deals!
@@ -47,7 +48,7 @@ const Home = () => {
       Explore Collections
     </Link>
   </div>
-  <div className="w-1/2 h-[80vh]">
+  <div className="w-[100vw] md:w-1/2 h-[80vh]">
     <img
       src="/Hero.png"
       alt="Hero"
@@ -55,6 +56,7 @@ const Home = () => {
     />
   </div>
 </div>
+<ServiceCard/>
       <h1 style={{fontFamily:"ubuntu"}} className="text-4xl text-gray-500 font-[700] flex justify-between ml-[5vw] mr-[5vw]">Latest Products <Link to="/search" className="findmore flex justify-center items-center gap-4">more <FaArrowAltCircleRight/></Link> </h1>
       <main className="flex flex-row min-h-[60vh]">
         {

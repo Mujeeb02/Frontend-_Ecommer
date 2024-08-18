@@ -26,14 +26,14 @@ const Header = ({ user }: PropsType) => {
   return (
     <div className="flex justify-between items-center bg-slate-100 p-4 shadow-md">
       {/* Logo Section */}
-      <div className="ml-10">
+      <div className="md:ml-10">
         <Link to="/">
           <img src="/logo.png" alt="Shop Nestle" className="w-32 h-auto" />
         </Link>
       </div>
 
       {/* Navigation Links */}
-      <nav className="flex items-center space-x-6 mr-10">
+      <nav className="flex items-center space-x-6 md:mr-10">
         <Link
           className="text-gray-700 hover:text-gray-900 transition-colors duration-300 font-semibold"
           onClick={() => setIsOpen(false)}
