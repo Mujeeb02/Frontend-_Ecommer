@@ -93,7 +93,7 @@ const Productmanagement = () => {
           <>
             <section>
               <strong>ID - {product._id}</strong>
-              <img src={`http://localhost:4000/${photo}`} alt="Product" />
+              <img src={`${photo}`} alt="Product" />
               <p>{name}</p>
               {stock > 0 ? (
                 <span className="green">{stock} Available</span>

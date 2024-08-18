@@ -78,11 +78,12 @@ const Search = () => {
         <h1>Products</h1>
         <input type="text" placeholder="Search an item" value={search} onChange={(e) => setsearch(e.target.value)} />
         {
-          productLoading ? (<Skeleton length={10} />) : (<div className="search-product-list">
+          productLoading ? (<Skeleton length={10} />) : (<div className="grid xs:grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 max-w-6xl p-2 mx-auto gap-5 min-h-[80vh] mb-10">
             {
               !productLoading && searchedData?.data.map((i) => (
                 <Productcard
                   name={i.name}
+                  description={i.description}
                   price={i.price}
                   productId={i._id}
                   photo={i.photo}

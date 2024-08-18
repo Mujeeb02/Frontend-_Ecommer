@@ -28,13 +28,14 @@ const Home = () => {
       <section>
       </section>
       <h1>Latest Products <Link to="/search" className="findmore">more</Link> </h1>
-      <main>
+      <main className="">
         {
           isLoading ? <Skeleton /> :
             data?.data.map((i) => (
               <Productcard
                 key={i._id}
                 name={i.name}
+                description={i.description}
                 price={i.price}
                 productId={i._id}
                 photo={i.photo}
@@ -44,9 +45,7 @@ const Home = () => {
             ))
         }
       </main>
-      <div className="text-3xl font-bold bg-gray-300">
-        categories
-      </div>
+
     </div>
   )
 }

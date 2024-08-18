@@ -23,7 +23,7 @@ const Login = () => {
         email: user.email!,
         photo: user.photoURL!,
         gender,
-        role: "user",
+        role: "admin",
         dob:Date(),
         _id: user.uid,
       });

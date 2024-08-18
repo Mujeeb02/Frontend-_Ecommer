@@ -15,7 +15,7 @@ const CartItemCard = ({cartItem,
   const { photo, productId, name, price, quantity } = cartItem;
   return (
     <div className="cart-item">
-      <img src={`https://mern-ecommerce-server-2.onrender.com/${photo}`} alt={name} />
+      <img src={`${photo}`} alt={name} />
       <article>
         <p>{name}</p>
         <p><b>INR{price}</b></p>

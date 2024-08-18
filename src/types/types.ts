@@ -9,6 +9,7 @@ export interface User {
 }
 
 export type Product = {
+    description: string;
     name: string;
     price: number;
     stock: number;

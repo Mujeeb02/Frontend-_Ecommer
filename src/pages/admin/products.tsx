@@ -55,7 +55,7 @@ const Products = () => {
   useEffect(() => {
     if (data) {
       setRows(data.data.map((i) => ({
-        photo: <img src={`https://mern-ecommerce-server-2.onrender.com/${i.photo}`} />,
+        photo: <img src={`${i.photo}`} />,
         name: i.name,
         price: i.price,
         stock: i.stock,
