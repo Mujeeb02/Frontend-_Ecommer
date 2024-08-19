@@ -10,7 +10,7 @@ import {
   discountApplied,
   removeCartItem,
 } from "../redux/reducer/cartReducer";
-import { RootState} from "../redux/reducer/store";
+import { RootState } from "../redux/reducer/store";
 import { CartItem } from "../types/types";
 
 const Cart = () => {
@@ -40,9 +40,12 @@ const Cart = () => {
     const { token: cancelToken, cancel } = axios.CancelToken.source();
     const timeOutID = setTimeout(() => {
       axios
-        .get(`https://mern-ecommerce-server-2.onrender.com/api/v1/payment/discount?coupon=${couponCode}`, {
-          cancelToken,
-        })
+        .get(
+          `https://mern-ecommerce-server-2.onrender.com/api/v1/payment/discount?coupon=${couponCode}`,
+          {
+            cancelToken,
+          }
+        )
         .then((res) => {
           dispatch(discountApplied(res.data.Discount));
           setIsValidCouponCode(true);
@@ -67,8 +70,8 @@ const Cart = () => {
   }, [cartItems]);
 
   return (
-    <div className="min-h-screen flex bg-gray-100 p-6">
-      <main className="max-w-4xl mx-auto bg-white shadow-lg rounded-lg p-6">
+    <div className="min-h-screen flex flex-col sm:flex-row bg-gray-100 p-6">
+      <main className="w-full max-w-4xl mx-auto bg-white shadow-lg rounded-lg p-6 overflow-x-auto">
         <h2 className="text-2xl font-semibold text-gray-800 mb-4">Your Cart</h2>
         {cartItems.length > 0 ? (
           <table className="w-full text-left">
@@ -98,7 +101,7 @@ const Cart = () => {
         )}
       </main>
 
-      <aside className="max-w-md mx-auto bg-white shadow-lg rounded-lg p-6 mt-6">
+      <aside className="w-full max-w-md mx-auto bg-white shadow-lg rounded-lg p-6 mt-6 sm:mt-0 sm:ml-6">
         <p className="text-lg text-gray-700">
           Subtotal: <span className="font-semibold">₹{subtotal}</span>
         </p>
