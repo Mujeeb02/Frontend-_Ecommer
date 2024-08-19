@@ -10,7 +10,7 @@ import {
   discountApplied,
   removeCartItem,
 } from "../redux/reducer/cartReducer";
-import { RootState, server } from "../redux/reducer/store";
+import { RootState} from "../redux/reducer/store";
 import { CartItem } from "../types/types";
 
 const Cart = () => {
