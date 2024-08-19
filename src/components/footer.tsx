@@ -3,8 +3,8 @@ import { Link } from "react-router-dom";
 
 const Footer = () => {
     return (
-        <footer className="bg-slate-800 text-gray-200 py-8">
-            <div className="container mx-auto flex flex-col md:flex-row justify-between items-center">
+        <footer className="-mt-10 sm:mt-0 bg-slate-800 text-gray-200 py-8 overflow-hidden">
+            <div className="container mx-auto flex flex-col md:flex-row justify-between items-center ml-[5vw]">
                 {/* Logo Section */}
                 <div className="flex flex-col items-center mb-6 md:mb-0">
                     <img src="/logo.png" alt="Shop Nestle" className="w-32 h-auto mb-4" />
@@ -12,7 +12,7 @@ const Footer = () => {
                 </div>
 
                 {/* Navigation Links */}
-                <div className="flex flex-col md:flex-row items-center space-y-4 md:space-y-0 md:space-x-8">
+                <div className="flex flex-col md:flex-row items-center space-y-4 md:space-y-0 md:space-x-8 ml-[5vw]">
                     <Link
                         className="text-gray-400 hover:text-gray-200 transition-colors duration-300"
                         to="/"
@@ -40,7 +40,7 @@ const Footer = () => {
                 </div>
 
                 {/* Social Media Icons */}
-                <div className="flex space-x-6 mt-6 md:mt-0">
+                <div className="flex space-x-6 mt-6 md:mt-0 pr-[5vw]">
                     <a
                         href="https://www.facebook.com"
                         target="_blank"
